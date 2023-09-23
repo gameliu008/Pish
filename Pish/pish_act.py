@@ -32,6 +32,7 @@ class pish(nn.Module):
         a3 = gs_gs(self.p3, 4, a2, 1.0)
         #a3 = gs_gs(self.p3, 4, a2, 100.0)
         b = 0.0
+        #b = 0.5
         z1 = (1.0 / (a1 + torch.exp(-x)))
         z2 = (1.0 / (a3 + torch.exp(-x))) + b
 
