@@ -17,21 +17,21 @@ class pish(nn.Module):
 
         super().__init__()
 
-        self.beta1 = nn.Parameter(torch.Tensor([0.5]), requires_grad=True)
-        self.beta2 = nn.Parameter(torch.Tensor([0.5]), requires_grad=True)
-        self.beta3 = nn.Parameter(torch.Tensor([0.5]), requires_grad=True)
+        self.p1 = nn.Parameter(torch.Tensor([0.5]), requires_grad=True)
+        self.p2 = nn.Parameter(torch.Tensor([0.5]), requires_grad=True)
+        self.p3 = nn.Parameter(torch.Tensor([0.5]), requires_grad=True)
 
-    def forward(self, input):
+    def forward(self, x):
         '''
         Forward pass of the function.
         '''
 
-        b1 = gs_gs(self.beta1, 4, -3.0, 0.0)
-        b2 = gs_gs(self.beta2, 4, 0.0, 0.0)
-        b3 = gs_gs(self.beta3, 4, b2, 1.0)
-        #b3 = gs_gs(self.beta3, 4, b2, 100.0)
-        c = 0.0
-        z1 = (1.0 / (b1 + torch.exp(-input)))
-        z2 = (1.0 / (b3 + torch.exp(-input))) + c
+        a1 = gs_gs(self.p1, 4, -3.0, 0.0)
+        a2 = gs_gs(self.p2, 4, 0.0, 0.0)
+        a3 = gs_gs(self.p3, 4, b2, 1.0)
+        #a3 = gs_gs(self.p3, 4, b2, 100.0)
+        b = 0.0
+        z1 = (1.0 / (a1 + torch.exp(-x)))
+        z2 = (1.0 / (a3 + torch.exp(-x))) + b
 
-        return input * torch.tanh(torch.where(input > 0, z1, z2))
+        return x * torch.tanh(torch.where(x > 0, z1, z2))
