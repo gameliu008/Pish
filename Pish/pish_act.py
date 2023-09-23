@@ -28,8 +28,8 @@ class pish(nn.Module):
 
         a1 = gs_gs(self.p1, 4, -3.0, 0.0)
         a2 = gs_gs(self.p2, 4, 0.0, 0.0)
-        a3 = gs_gs(self.p3, 4, b2, 1.0)
-        #a3 = gs_gs(self.p3, 4, b2, 100.0)
+        a3 = gs_gs(self.p3, 4, a2, 1.0)
+        #a3 = gs_gs(self.p3, 4, a2, 100.0)
         b = 0.0
         z1 = (1.0 / (a1 + torch.exp(-x)))
         z2 = (1.0 / (a3 + torch.exp(-x))) + b
